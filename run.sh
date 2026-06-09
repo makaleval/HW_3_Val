@@ -5,11 +5,19 @@ build_generator() {
 }
 
 run_generator() {
-    docker docker run -v "$(pwd)/data:/data" generator
+    docker run -v "$(pwd)/data:/data" generator python generate.py /data
 }
 
 create_local_data() {
     python3 ./generate.py local_data
+}
+
+build_reporter() {
+    docker build -t reporter -f Dockerfile_reporter .
+}
+
+run_reporter() {
+    docker docker run -v "$(pwd)/data:/data" reporter
 }
 
 case "$1" in
@@ -21,6 +29,12 @@ case "$1" in
         ;;
     create_local_data)
         create_local_data
+        ;;
+    build_reporter)
+        build_reporter
+        ;;
+    run_reporter)
+        run_reporter
         ;;
     *)
         exit 1
