@@ -5,14 +5,24 @@ build_generator() {
 }
 
 run_generator() {
-    mkdir -p ./data
-    docker run --rm \
-        -v $(pwd)/data:/app/data \
-        generator \
-        python generate.py "/app/data"
+    docker docker run -v "$(pwd)/data:/data" generator
 }
 
 create_local_data() {
-    mkdir -p ./local_data
-    python generate.py "./local_data"
+    python3 ./generate.py local_data
 }
+
+case "$1" in
+    build_generator)
+        build_generator
+        ;;
+    run_generator)
+        run_generator
+        ;;
+    create_local_data)
+        create_local_data
+        ;;
+    *)
+        exit 1
+        ;;
+esac
