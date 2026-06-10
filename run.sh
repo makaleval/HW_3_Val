@@ -24,6 +24,16 @@ structure() {
     find . -not -path '*/.git/*'
 }
 
+clear_data() {
+
+}
+
+inside_generator() {
+}
+
+inside_reporter() {
+
+}
 
 case "$1" in
     build_generator)
