@@ -25,14 +25,15 @@ structure() {
 }
 
 clear_data() {
-
+    rm -f data/*
 }
 
 inside_generator() {
+    docker run -v "$(pwd)/data:/data" generator ls -la /data
 }
 
 inside_reporter() {
-
+    docker run -v "$(pwd)/data:/data" reporter ls -la /data
 }
 
 case "$1" in
