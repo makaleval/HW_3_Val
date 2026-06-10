@@ -20,6 +20,11 @@ run_reporter() {
     docker run -v "$(pwd)/data:/data" reporter
 }
 
+structure() {
+    find . -not -path '*/.git/*'
+}
+
+
 case "$1" in
     build_generator)
         build_generator
@@ -35,6 +40,18 @@ case "$1" in
         ;;
     run_reporter)
         run_reporter
+        ;;
+    structure)
+        structure
+        ;;
+    clear_data)
+        clear_data
+        ;;
+    inside_generator)
+        inside_generator
+        ;;
+    inside_reporter)
+        inside_reporter
         ;;
     *)
         exit 1
